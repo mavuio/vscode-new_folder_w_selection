@@ -1,0 +1,80 @@
+{
+  "name": "new-folder-with-selection",
+  "displayName": "New Folder With Selection / Explode Folders",
+  "description": "Creates New Folder and moves or copies currently selected files into it, can reverse this process by 'exploding' folders.",
+  "version": "1.0.0",
+  "author": "Manfred Wuits <manfred@mavu.io>",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "publisher": "mavu-io",
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:new-folder-with-selection.newFolderWithSelection",
+    "onCommand:new-folder-with-selection.newFolderWithSelectionCopy",
+    "onCommand:new-folder-with-selection.explodeFolder"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [{
+        "command": "new-folder-with-selection.newFolderWithSelection",
+        "title": "New Folder With Selection"
+      },
+      {
+        "command": "new-folder-with-selection.newFolderWithSelectionCopy",
+        "title": "New Folder With Selection (copy Files into new Folder)"
+      },
+      {
+        "command": "new-folder-with-selection.explodeFolder",
+        "title": "Explode Folder"
+      }
+    ],
+    "menus": {
+      "explorer/context": [{
+          "when": "!explorerResourceIsFolder",
+          "group": "7_modification",
+          "command": "new-folder-with-selection.newFolderWithSelection"
+        },
+        {
+          "when": "!explorerResourceIsFolder",
+          "group": "7_modification",
+          "command": "new-folder-with-selection.newFolderWithSelectionCopy"
+        },
+        {
+          "when": "explorerResourceIsFolder",
+          "group": "7_modification",
+          "command": "new-folder-with-selection.explodeFolder"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "pnpm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.76.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "eslint": "^8.34.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5",
+    "@vscode/test-electron": "^2.2.3"
+  },
+  "license": "MIT",
+  "keywords": [
+    "new_folder",
+    "files",
+    "create",
+    "multiple",
+    "folder",
+    "selection",
+    "selected",
+    "explode"
+  ]
+}
